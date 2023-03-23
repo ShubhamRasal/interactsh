@@ -37,5 +37,5 @@ jobs:
       env:
         GRAFANA_CLOUD: ${{ secrets.GRAFANA_CLOUD }}
       run: |
-        ansible-playbook deploy.yml 
-    
+        ansible-playbook deploy.yaml 
+      working-directory: ./deploy
