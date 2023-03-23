@@ -98,7 +98,7 @@
     community.docker.docker_image:
       name: "{{ container_image }}"
       source: pull
-    tags: interactsh
+    tags: deploy
 
   - name: Launch docker container
     community.docker.docker_container:
