@@ -8,14 +8,11 @@ on:
 
 jobs:
   build:
-    name: Ansible Lint # Naming the build is important to use it as a status check
+    name: Ansible Deploy 
     runs-on: ubuntu-latest
 
     steps:
-      # Important: This sets up your GITHUB_WORKSPACE environment variable
     - uses: actions/checkout@v3
-      with:
-        fetch-depth: 0 # needed for progressive mode to work
 
     - name: Setup Python
       uses: actions/setup-python@v2
@@ -32,6 +29,13 @@ jobs:
       env:
         DO_SSH_KEY: ${{ secrets.DO_SSH_KEY }}
       run: |
-        mkdir .ssh
-        echo "$DO_SSH_KEY" > .ssh/id_digitalocean
-        chmod 600 .ssh/id_digitalocean
+        mkdir ~/.ssh
+        echo "$DO_SSH_KEY" >  ~/.ssh/oast
+        chmod 600  ~/.ssh/oast
+
+    - name: run playbook
+      env:
+        GRAFANA_CLOUD: ${{ secrets.GRAFANA_CLOUD }}
+      run: |
+        ansible-playbook deploy.yml 
+    
