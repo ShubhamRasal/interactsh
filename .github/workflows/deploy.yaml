@@ -1,11 +1,11 @@
 name: 🎉 Deploy
 
 on:
-  push:
-    tags:
-      - '*'
   workflow_dispatch:
-
+      tags:
+        description: 'Docker tag to deploy'
+        required: true
+        type: string
 jobs:
   build:
     name: Ansible Deploy 
@@ -37,5 +37,5 @@ jobs:
       env:
         GRAFANA_CLOUD: ${{ secrets.GRAFANA_CLOUD }}
       run: |
-        ansible-playbook deploy.yaml 
+        ansible-playbook deploy.yaml  --extra-vars "container_tag=${{ inputs.tags }}"
       working-directory: ./deploy
