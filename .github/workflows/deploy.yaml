@@ -24,6 +24,14 @@ jobs:
 
     - name: Install dependencies
       run: |
-        apt install ansible-core
-        pip install -Iv 'resolvelib<0.6.0
+        sudo apt install ansible-core
+        sudo -H pip install -Iv 'resolvelib<0.6.0'
         ansible-galaxy collection install community.docker
+
+    - name: set ansible config secrets
+      env:
+        DO_SSH_KEY: ${{ secrets.DO_SSH_KEY }}
+      run: |
+        mkdir .ssh
+        echo "$DO_SSH_KEY" > .ssh/id_digitalocean
+        chmod 600 .ssh/id_digitalocean
