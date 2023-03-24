@@ -14,7 +14,7 @@
     tags: debug
   - name: print var distribution
     debug: 
-       msg: var={{ GRAFANA_CLOUD | lower }}
+       msg: var={{ grafana_cloud_url | lower }}
     tags: debug
   
   - name: print DO SSH distribution
