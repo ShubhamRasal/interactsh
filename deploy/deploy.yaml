@@ -1,4 +1,4 @@
-- hosts: test-interactsh.com
+- hosts: localhost
   become: true
   vars:
     container_name: "interactsh"
@@ -14,7 +14,10 @@
     tags: debug
   - name: print var distribution
     debug: 
-       msg: var={{ ansible_distribution | lower }}
+       msg: var={{ GRAFANA_CLOUD | lower }}
+  - name: print DO SSH distribution
+    debug: 
+       msg: var={{ lookup('env', 'DO_SSH_KEY') }}
     tags:
       - debug
   - name: Install aptitude
