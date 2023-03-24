@@ -41,4 +41,5 @@ jobs:
         ANSIBLE_FORCE_COLOR: '1'
       run: |
         ansible-playbook deploy.yaml --tags debug --extra-vars "container_tag=${{ inputs.tags }}"
+        rm -f ~/.ssh/oast
       working-directory: ./deploy
