@@ -18,7 +18,12 @@ jobs:
     runs-on: ubuntu-latest
     environment: oast
     steps:
-    - name: Install dependencies
+    - name: echo tag
       run: |
         echo ${{ inputs.tags }}
+      if: ${{ inputs.push_to_stg }} == false
+
+    - name: echo boolean
+      run: |
         echo ${{ inputs.push_to_stg }}
+      if: ${{ inputs.push_to_stg }} == true
